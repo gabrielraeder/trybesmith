@@ -15,3 +15,8 @@ export interface LoginReturn {
   type: string | null,
   message: string,
 }
+
+export interface UserReturn {
+  type: string | null,
+  message: string,
+}

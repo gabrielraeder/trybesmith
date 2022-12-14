@@ -1,7 +1,8 @@
 import UserModel from '../models/user.model';
-import { User, Login, LoginReturn } from '../interfaces/user.interface';
+import { User, Login, LoginReturn, UserReturn } from '../interfaces/user.interface';
 import { createToken } from '../auth/jwtFunctions';
 import { UserForToken } from '../interfaces/jwt.interface';
+import { userValidation } from './validations/inputValidations';
 
 export default class ProductService {
   public model: UserModel;
@@ -10,11 +11,15 @@ export default class ProductService {
     this.model = new UserModel();
   }
 
-  public async create(data: User): Promise<string> {
+  public async create(data: User): Promise<UserReturn> {
+    const validate = userValidation(data);
+    if (validate) {
+      return { type: 'ERROR', message: validate };
+    }
     const newUser = await this.model.create(data);
     const { password, ...userWithoutPassword } = newUser;
     const token = createToken(userWithoutPassword as UserForToken);
-    return token;
+    return { type: null, message: token };
   }
 
   public async login(data: Login): Promise<LoginReturn> {

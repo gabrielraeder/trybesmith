@@ -1,8 +1,13 @@
 import Joi from 'joi';
 
-const productSchema = Joi.object({
+export const productSchema = Joi.object({
   name: Joi.string().min(3),
   amount: Joi.string().min(3),
 });
 
-export default productSchema;
+export const userSchema = Joi.object({
+  username: Joi.string().min(3),
+  vocation: Joi.string().min(3),
+  level: Joi.number().min(1),
+  password: Joi.string().min(8),
+});

@@ -1,6 +1,6 @@
 import ProductModel from '../models/product.model';
 import { Product, ProductObjReturn } from '../interfaces/product.interface';
-import productValidation from './validations/inputValidations';
+import { productValidation } from './validations/inputValidations';
 
 export default class ProductService {
   public model: ProductModel;

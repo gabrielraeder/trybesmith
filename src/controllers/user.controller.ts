@@ -6,8 +6,11 @@ export default class PostController {
 
   public create = async (req: Request, res: Response) => {
     const data = req.body;
-    const token = await this.userService.create(data);
-    return res.status(201).json({ token });
+    const { type, message } = await this.userService.create(data);
+    if (type) {
+      return res.status(422).json({ message });
+    }
+    return res.status(201).json({ token: message });
   };
 
   public login = async (req: Request, res: Response) => {
