@@ -1,5 +1,6 @@
 import ProductModel from '../models/product.model';
-import { Product } from '../interfaces/product.interface';
+import { Product, ProductObjReturn } from '../interfaces/product.interface';
+import productValidation from './validations/inputValidations';
 
 export default class ProductService {
   public model: ProductModel;
@@ -8,9 +9,13 @@ export default class ProductService {
     this.model = new ProductModel();
   }
 
-  public async create(data: Product): Promise<Product> {
+  public async create(data: Product): Promise<ProductObjReturn> {
+    const validate = productValidation(data);
+    if (validate) {
+      return { type: 'ERROR', message: validate };
+    }
     const product = await this.model.create(data);
-    return product;
+    return { type: null, message: product };
   }
 
   public async getAll(): Promise<Product[]> {

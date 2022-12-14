@@ -25,12 +25,4 @@ export default class ProductModel {
     );
     return rows as Product[];
   }
-
-  // public async getByOrderId(id:string): Promise<RowDataPacket[]> {
-  //   const [rows] = await this.connection.execute<RowDataPacket[]>(
-  //     'SELECT id FROM Trybesmith.products WHERE order_id=?',
-  //     [id],
-  //   );
-  //   return rows;
-  // }
 }
