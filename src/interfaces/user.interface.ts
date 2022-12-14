@@ -5,3 +5,13 @@ export interface User {
   level: number,
   password: string,
 }
+
+export interface Login {
+  username: string,
+  password: string,
+}
+
+export interface LoginReturn {
+  type: string | null,
+  message: string,
+}
